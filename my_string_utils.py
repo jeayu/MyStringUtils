@@ -84,7 +84,6 @@ class CsvJsonCommand(sublime_plugin.TextCommand):
         settings = sublime.load_settings("MyStringUtils.sublime-settings")
         separator_regex = settings.get("csv_separator_regex")
         for region in self.view.sel():
-
             if not region.empty():
                 text = self.view.substr(region)
                 lines = re.split(r'\n', text)
@@ -108,3 +107,15 @@ class JsonCsvCommand(sublime_plugin.TextCommand):
                 result = [separator.join(text_json[0].keys())] + \
                     [separator.join(i.values()) for i in text_json]
                 self.view.replace(edit, region, '\n'.join(result))
+
+
+class FilterDuplicatedLinesCommand(sublime_plugin.TextCommand):
+
+    def run(self, edit):
+        # filter_duplicated_lines
+        for region in self.view.sel():
+            if not region.empty():
+                text = self.view.substr(region)
+                lines = re.split(r'\n', text)
+                self.view.replace(edit, region, '\n'.join(
+                    sorted(set(lines), key=lines.index)))

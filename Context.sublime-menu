@@ -29,6 +29,10 @@
             {
                 "caption": "Convert json -> csv",
                 "command": "json_csv"
+            },
+            {
+                "caption": "Filter duplicated lines",
+                "command": "filter_duplicated_lines"
             }
         ],
         "id": "context-convert"
