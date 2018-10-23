@@ -1,0 +1,26 @@
+[
+    {
+        "caption": "MyStringUtils: Convert camel <-> underline",
+        "command": "camel_underline"
+    },
+    {
+        "caption": "MyStringUtils: Convert underline <-> words",
+        "command": "underline_words"
+    },
+    {
+        "caption": "MyStringUtils: Convert camel <-> words",
+        "command": "camel_words"
+    },
+    {
+        "caption": "MyStringUtils: Convert json list",
+        "command": "json_list"
+    },
+    {
+        "caption": "MyStringUtils: Convert csv -> json",
+        "command": "csv_json"
+    },
+    {
+        "caption": "MyStringUtils: Convert json -> csv",
+        "command": "json_csv"
+    }
+]

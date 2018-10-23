@@ -1,0 +1,40 @@
+[
+    {
+        "caption": "-",
+        "id": "context-convert-end"
+    },
+    {
+        "caption": "MyStringUtils",
+        "children": [
+            {
+                "caption": "Convert camel <-> underline",
+                "command": "camel_underline"
+            },
+            {
+                "caption": "Convert underline <-> words",
+                "command": "underline_words"
+            },
+            {
+                "caption": "Convert camel <-> words",
+                "command": "camel_words"
+            },
+            {
+                "caption": "Convert json list",
+                "command": "json_list"
+            },
+            {
+                "caption": "Convert csv -> json",
+                "command": "csv_json"
+            },
+            {
+                "caption": "Convert json -> csv",
+                "command": "json_csv"
+            }
+        ],
+        "id": "context-convert"
+    },
+    {
+        "caption": "-",
+        "id": "context-convert-end"
+    }
+]
