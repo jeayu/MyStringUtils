@@ -106,5 +106,5 @@ class JsonCsvCommand(sublime_plugin.TextCommand):
                 text = self.view.substr(region)
                 text_json = json.loads(text)
                 result = [separator.join(text_json[0].keys())] + \
-                    [separator.join(i.values()) for i in text_json[1:]]
+                    [separator.join(i.values()) for i in text_json]
                 self.view.replace(edit, region, '\n'.join(result))
