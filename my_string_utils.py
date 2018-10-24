@@ -83,6 +83,7 @@ class CsvJsonCommand(sublime_plugin.TextCommand):
         # csv_json
         settings = sublime.load_settings("MyStringUtils.sublime-settings")
         separator_regex = settings.get("csv_separator_regex")
+        indent = settings.get("csv_to_json_indent")
         for region in self.view.sel():
             if not region.empty():
                 text = self.view.substr(region)
@@ -91,7 +92,7 @@ class CsvJsonCommand(sublime_plugin.TextCommand):
                 result = [dict(zip(keys, re.split(separator_regex, value)))
                           for value in lines[1:]]
                 self.view.replace(edit, region, json.dumps(
-                    result, ensure_ascii=False))
+                    result, ensure_ascii=False, indent=indent))
 
 
 class JsonCsvCommand(sublime_plugin.TextCommand):
