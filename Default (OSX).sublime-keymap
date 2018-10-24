@@ -1,10 +1,10 @@
 [
   { "keys": ["alt+c", "alt+u"], "command": "camel_underline" },
-  { "keys": ["alt+u", "alt+c"], "command": "camel_underline" },
+  { "keys": ["alt+u", "alt+c"], "command": "underline_camel" },
   { "keys": ["alt+u", "alt+o"], "command": "underline_words" },
-  { "keys": ["alt+o", "alt+u"], "command": "underline_words" },
+  { "keys": ["alt+o", "alt+u"], "command": "words_underline" },
   { "keys": ["alt+c", "alt+o"], "command": "camel_words" },
-  { "keys": ["alt+o", "alt+c"], "command": "camel_words" },
+  { "keys": ["alt+o", "alt+c"], "command": "words_camel" },
   { "keys": ["alt+j", "alt+l"], "command": "json_list" },
   { "keys": ["alt+c", "alt+j"], "command": "csv_json" },
   { "keys": ["alt+j", "alt+c"], "command": "json_csv" },

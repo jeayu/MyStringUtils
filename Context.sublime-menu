@@ -7,16 +7,28 @@
         "caption": "MyStringUtils",
         "children": [
             {
-                "caption": "Convert camel <-> underline",
+                "caption": "Convert camel -> underline",
                 "command": "camel_underline"
             },
             {
-                "caption": "Convert underline <-> words",
+                "caption": "Convert underline -> camel",
+                "command": "underline_camel"
+            },
+            {
+                "caption": "Convert underline -> words",
                 "command": "underline_words"
             },
             {
-                "caption": "Convert camel <-> words",
+                "caption": "Convert words -> underline",
+                "command": "words_underline"
+            },
+            {
+                "caption": "Convert camel -> words",
                 "command": "camel_words"
+            },
+            {
+                "caption": "Convert words -> camel",
+                "command": "words_camel"
             },
             {
                 "caption": "Convert json list",

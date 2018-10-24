@@ -6,12 +6,13 @@ import json
 
 
 def camel2underline(camel_str):
-    return re.sub(r'([a-z]|\d)([A-Z])', r'\1_\2', camel_str).lower()
+    result = re.sub(r'([a-z]|\d)([A-Z])', r'\1_\2', camel_str)
+    return result.lower() if result is not camel_str else camel_str
 
 
 def underline2camel(underline_str):
-    return re.sub(r'(_\w)', lambda x: x.group(
-        1)[1].upper(), underline_str.lower())
+    return re.sub(r'(_\w)', lambda x: x.group(1)[1].upper(
+    ), underline_str.lower()) if '_' in underline_str else underline_str
 
 
 def underline2words(text):
@@ -19,7 +20,7 @@ def underline2words(text):
 
 
 def words2underline(text):
-    return '_'.join(re.split(r'\s+', text))
+    return '_'.join(re.split(r'\s+', text)) if ' ' in text.strip() else text
 
 
 def camel2words(text):
@@ -27,7 +28,7 @@ def camel2words(text):
 
 
 def words2camel(text):
-    return underline2camel(words2underline(text))
+    return underline2camel(words2underline(text)) if ' ' in text.strip() else text
 
 
 def split_line(text):
@@ -37,43 +38,60 @@ def split_line(text):
 class CamelUnderlineCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
-        # camel_underline
         for region in self.view.sel():
             if not region.empty():
                 text = self.view.substr(region)
-                text = underline2camel(
-                    text) if '_' in text else camel2underline(text)
-                self.view.replace(edit, region, text)
+                self.view.replace(edit, region, camel2underline(text))
+
+
+class UnderlineCamelCommand(sublime_plugin.TextCommand):
+
+    def run(self, edit):
+        for region in self.view.sel():
+            if not region.empty():
+                text = self.view.substr(region)
+                self.view.replace(edit, region, underline2camel(text))
 
 
 class UnderlineWordsCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
-        # underline_words
         for region in self.view.sel():
             if not region.empty():
                 text = self.view.substr(region)
-                text = underline2words(
-                    text) if '_' in text else words2underline(text)
-                self.view.replace(edit, region, text)
+                self.view.replace(edit, region, underline2words(text))
+
+
+class WordsUnderlineCommand(sublime_plugin.TextCommand):
+
+    def run(self, edit):
+        for region in self.view.sel():
+            if not region.empty():
+                text = self.view.substr(region)
+                self.view.replace(edit, region, words2underline(text))
 
 
 class CamelWordsCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
-        # camel_words
         for region in self.view.sel():
             if not region.empty():
                 text = self.view.substr(region).strip()
-                text = words2camel(
-                    text) if ' ' in text else camel2words(text)
-                self.view.replace(edit, region, text)
+                self.view.replace(edit, region, camel2words(text))
+
+
+class WordsCamelCommand(sublime_plugin.TextCommand):
+
+    def run(self, edit):
+        for region in self.view.sel():
+            if not region.empty():
+                text = self.view.substr(region).strip()
+                self.view.replace(edit, region, words2camel(text))
 
 
 class JsonListCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
-        # json_list
         for region in self.view.sel():
             if not region.empty():
                 text = self.view.substr(region)
@@ -84,7 +102,6 @@ class JsonListCommand(sublime_plugin.TextCommand):
 class CsvJsonCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
-        # csv_json
         settings = sublime.load_settings("MyStringUtils.sublime-settings")
         separator_regex = settings.get("csv_separator_regex")
         indent = settings.get("csv_to_json_indent")
@@ -102,7 +119,6 @@ class CsvJsonCommand(sublime_plugin.TextCommand):
 class JsonCsvCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
-        # json_csv
         settings = sublime.load_settings("MyStringUtils.sublime-settings")
         separator = settings.get("csv_separator")
         for region in self.view.sel():
@@ -117,7 +133,6 @@ class JsonCsvCommand(sublime_plugin.TextCommand):
 class FilterDuplicatedLinesCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
-        # filter_duplicated_lines
         for region in self.view.sel():
             if not region.empty():
                 text = self.view.substr(region)
