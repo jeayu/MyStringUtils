@@ -1,15 +1,27 @@
 [
     {
-        "caption": "MyStringUtils: Convert camel <-> underline",
+        "caption": "MyStringUtils: Convert camel -> underline",
         "command": "camel_underline"
     },
     {
-        "caption": "MyStringUtils: Convert underline <-> words",
+        "caption": "MyStringUtils: Convert underline -> camel",
+        "command": "underline_camel"
+    },
+    {
+        "caption": "MyStringUtils: Convert underline -> words",
         "command": "underline_words"
+    },
+    {
+        "caption": "MyStringUtils: Convert words -> words",
+        "command": "words_underline"
     },
     {
         "caption": "MyStringUtils: Convert camel <-> words",
         "command": "camel_words"
+    },
+    {
+        "caption": "MyStringUtils: Convert words -> words",
+        "command": "words_camel"
     },
     {
         "caption": "MyStringUtils: Convert json list",
