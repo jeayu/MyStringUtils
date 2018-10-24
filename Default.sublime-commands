@@ -24,7 +24,11 @@
         "command": "json_csv"
     },
     {
-        "caption": "Filter duplicated lines",
+        "caption": "MyStringUtils: Filter duplicated lines",
         "command": "filter_duplicated_lines"
+    },
+    {
+        "caption": "MyStringUtils: Convert csv -> create table sql",
+        "command": "csv_table_sql"
     }
 ]

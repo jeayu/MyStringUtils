@@ -33,6 +33,10 @@
             {
                 "caption": "Filter duplicated lines",
                 "command": "filter_duplicated_lines"
+            },
+            {
+                "caption": "Convert csv -> create table sql",
+                "command": "csv_table_sql"
             }
         ],
         "id": "context-convert"

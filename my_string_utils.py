@@ -30,6 +30,10 @@ def words2camel(text):
     return underline2camel(words2underline(text))
 
 
+def split_line(text):
+    return re.split(r'\n', text)
+
+
 class CamelUnderlineCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
@@ -87,7 +91,7 @@ class CsvJsonCommand(sublime_plugin.TextCommand):
         for region in self.view.sel():
             if not region.empty():
                 text = self.view.substr(region)
-                lines = re.split(r'\n', text)
+                lines = split_line(text)
                 keys = re.split(separator_regex, lines[0])
                 result = [dict(zip(keys, re.split(separator_regex, value)))
                           for value in lines[1:]]
@@ -117,6 +121,34 @@ class FilterDuplicatedLinesCommand(sublime_plugin.TextCommand):
         for region in self.view.sel():
             if not region.empty():
                 text = self.view.substr(region)
-                lines = re.split(r'\n', text)
+                lines = split_line(text)
                 self.view.replace(edit, region, '\n'.join(
                     sorted(set(lines), key=lines.index)))
+
+
+class CsvTableSqlCommand(sublime_plugin.TextCommand):
+
+    def run(self, edit):
+        settings = sublime.load_settings("MyStringUtils.sublime-settings")
+        separator_regex = settings.get("csv_separator_regex")
+        for region in self.view.sel():
+            if not region.empty():
+                text = self.view.substr(region)
+                lines = split_line(text)
+                table_name = lines[0].strip()
+                comments = re.split(separator_regex, lines[1])
+                fields = re.split(separator_regex, lines[2])
+                field_types = re.split(
+                    separator_regex, lines[3])
+                self.view.replace(edit, region, self.create_table_sql(
+                    table_name, fields, field_types, comments))
+
+    def create_table_sql(self, table_name, fields, field_types, comments):
+        details = ',\n  '.join(["`{0}` {1} NOT NULL COMMENT '{2}'".format(
+            field, field_type, comment) for field, field_type, comment in zip(fields, field_types, comments)])
+        return """
+CREATE TABLE `{table_name}` (
+  {details},
+  PRIMARY KEY (`{primary_key}`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='{table_name}';
+""".format(table_name=table_name, details=details, primary_key=fields[0])

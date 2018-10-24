@@ -9,4 +9,5 @@
   { "keys": ["alt+c", "alt+j"], "command": "csv_json" },
   { "keys": ["alt+j", "alt+c"], "command": "json_csv" },
   { "keys": ["alt+d"], "command": "filter_duplicated_lines" },
+  { "keys": ["ctrl+alt+t"], "command": "csv_table_sql" },
 ]
