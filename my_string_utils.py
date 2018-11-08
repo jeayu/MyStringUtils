@@ -167,3 +167,12 @@ CREATE TABLE `{table_name}` (
   PRIMARY KEY (`{primary_key}`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='{table_name}';
 """.format(table_name=table_name, details=details, primary_key=fields[0])
+
+
+class EvalCommand(sublime_plugin.TextCommand):
+
+    def run(self, edit):
+        for region in self.view.sel():
+            if not region.empty():
+                text = self.view.substr(region)
+                self.view.replace(edit, region, str(eval(text)))

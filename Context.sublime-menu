@@ -49,6 +49,10 @@
             {
                 "caption": "Convert csv -> create table sql",
                 "command": "csv_table_sql"
+            },
+            {
+                "caption": "eval",
+                "command": "eval"
             }
         ],
         "id": "context-convert"

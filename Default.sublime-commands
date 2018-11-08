@@ -42,5 +42,9 @@
     {
         "caption": "MyStringUtils: Convert csv -> create table sql",
         "command": "csv_table_sql"
+    },
+    {
+        "caption": "MyStringUtils: eval",
+        "command": "eval"
     }
 ]
