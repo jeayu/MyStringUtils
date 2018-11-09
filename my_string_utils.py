@@ -113,7 +113,7 @@ class CsvJsonCommand(sublime_plugin.TextCommand):
                 result = [dict(zip(keys, re.split(separator_regex, value)))
                           for value in lines[1:]]
                 self.view.replace(edit, region, json.dumps(
-                    result, ensure_ascii=False, indent=indent))
+                    result, ensure_ascii=False, indent=indent if indent else None))
 
 
 class JsonCsvCommand(sublime_plugin.TextCommand):
